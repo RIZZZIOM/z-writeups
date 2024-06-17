@@ -23,6 +23,7 @@ A new writeup will be added on a weekly basis. Stay tuned for regular updates!
 - INFOSEC BOXES
     - INFOSEC OSCP PREP
 - ME AND MY GIRLFRIEND
+- HAPPYCORP
 
 **HackTheBox**
 
