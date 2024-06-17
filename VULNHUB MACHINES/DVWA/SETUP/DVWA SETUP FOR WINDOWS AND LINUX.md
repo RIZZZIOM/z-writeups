@@ -156,7 +156,7 @@ iv. Grant this user permission over the *dvwa* database
 grant all privileges on dvwa.* to 'your_username'@'127.0.0.1' identified by 'your_password'
 ```
 
-7. Edit the *php.ini* file in *apache2* and make *Allow_url_include=On* and *Allow_url_fopen=On*.
+7. Edit the *php.ini* file in *apache2* and make *Allow_url_include=On* and *Allow_url_fopen=On*. Also change `;extension=gd` to `extension=gd`.
 
 ```bash
 
