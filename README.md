@@ -24,6 +24,7 @@ A new writeup will be added on a weekly basis. Stay tuned for regular updates!
     - INFOSEC OSCP PREP
 - ME AND MY GIRLFRIEND
 - HAPPYCORP
+- ESCALATE LINUX
 
 **HackTheBox**
 
