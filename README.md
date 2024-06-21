@@ -28,6 +28,7 @@ A new writeup will be added on a weekly basis. Stay tuned for regular updates!
 
 **HackTheBox**
 - LAME
+- TWOMILLION
 
 **TryHackMe**
 
