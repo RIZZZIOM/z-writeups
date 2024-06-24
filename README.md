@@ -25,6 +25,8 @@ A new writeup will be added on a weekly basis. Stay tuned for regular updates!
 - ME AND MY GIRLFRIEND
 - HAPPYCORP
 - ESCALATE LINUX
+- DPWWN
+	- DPWWN 1
 
 **HackTheBox**
 - LAME
