@@ -33,7 +33,7 @@ A new writeup will be added on a weekly basis. Stay tuned for regular updates!
 - TWOMILLION
 
 **TryHackMe**
-
+- PICKLE RICK
 
 ## 💡 Contribution
 
