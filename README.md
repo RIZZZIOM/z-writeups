@@ -27,6 +27,7 @@ A new writeup will be added on a weekly basis. Stay tuned for regular updates!
 - ESCALATE LINUX
 - DPWWN
 	- DPWWN 1
+- FRISTILEAKS
 
 **HackTheBox**
 - LAME
