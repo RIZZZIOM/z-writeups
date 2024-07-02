@@ -24,15 +24,15 @@ To find the target IP, I perform a network scan using **netdiscover**.
 
 After finding the target to be *192.168.1.7*, I perform an **nmap** aggressive scan to identify open ports and services.
 
-![[IMAGES/1.png]]
+![](IMAGES/1.png)
 
 # INITIAL ACCESS
 
 I visited the port 80 on a browser.
 
-![[IMAGES/2.png]]
+![](IMAGES/2.png)
 
-![[IMAGES/3.png]]
+![](IMAGES/3.png)
 
 This website disclosed two things:
 - There's a user called *oscp*.
@@ -40,29 +40,29 @@ This website disclosed two things:
 
 Upon closer inspection, when I clicked on the *SAMPLE PAGE* button on the top right corner, I got redirected to another page. I scrolled down and found a link to go to a login page.
 
-![[IMAGES/4.png]]
+![](IMAGES/4.png)
 
 Upon clicking the *Log in* button, I got redirected to a wordpress login panel.
 
-![[IMAGES/5.png]]
+![](IMAGES/5.png)
 
 To find more hidden directories and files, I run a scan using **dirb**.
 
-![[IMAGES/6.png]]
+![](IMAGES/6.png)
 
-![[IMAGES/7.png]]
+![](IMAGES/7.png)
 
 I visited the *robots.txt* page and found a link to a file called *secret.txt*
 
-![[IMAGES/8.png]]
+![](IMAGES/8.png)
 
 Upon visiting *secret.txt*, I get a base64 encoded data.
 
-![[IMAGES/9.png]]
+![](IMAGES/9.png)
 
 I decoded this file and downloaded it onto my system.
 
-![[IMAGES/10.png]]
+![](IMAGES/10.png)
 
 It turned out to be a private key. Since I identified the site to be powered by WordPress, I ran a scan using **wpscan**.
 
@@ -72,15 +72,15 @@ It turned out to be a private key. Since I identified the site to be powered by 
 └─# wpscan --url http://192.168.1.7
 ```
 
-![[IMAGES/11.png]]
+![](IMAGES/11.png)
 
-![[IMAGES/12.png]]
+![](IMAGES/12.png)
 
 Through this, I found the WordPress version and the theme used.
 
 Now I rename the private key to *private.key* and modify its permissions.
 
-![[IMAGES/13.png]]
+![](IMAGES/13.png)
 
 >`600` is the permission setting where:
 >- `6` means the owner can read and write (4 for read + 2 for write).
@@ -89,22 +89,22 @@ Now I rename the private key to *private.key* and modify its permissions.
 
 Earlier, I found that the box had a user called *oscp*, so I use **ssh** to connect to the target using this private key.
 
-![[IMAGES/14.png]]
+![](IMAGES/14.png)
 
 I got initial access to the system.
 # PRIVILEGE ESCALATION
 
 I know that the flag is inside the */root* directory, but to access that, I will have to escalate my privilege.
 
-![[IMAGES/15.png]]
+![](IMAGES/15.png)
 
 Hence, I move into the *tmp* directory and download the **[lse](https://github.com/diego-treitos/linux-smart-enumeration)** script from GitHub. Then I transfer it into the target system and run it.
 
-![[IMAGES/16.png]]
+![](IMAGES/16.png)
 
 It found a very interesting configuration in the system. The bash shell had an SUID bit.
 
-![[IMAGES/17.png]]
+![](IMAGES/17.png)
 
 I manually verify this by using the following command:
 
@@ -113,7 +113,7 @@ I manually verify this by using the following command:
 find / -user root -perm -u=s -ls 2>/dev/null
 ```
 
-![[IMAGES/18.png]]
+![](IMAGES/18.png)
 
 Now I can simply type **bash -p** to get root access.
 
@@ -124,11 +124,11 @@ In privileged mode, Bash does not drop its privileges (if it has any), even if t
 
 You can also visit **[GTFObins](https://gtfobins.github.io)** to look for methods to escalate privilege with **bash**.
 
-![[IMAGES/19.png]]
+![](IMAGES/19.png)
 
 Now that I have root access, I capture the flag inside the *root* directory.
 
-![[IMAGES/20.png]]
+![](IMAGES/20.png)
 # CLOSURE
 
 Here's a short summary of how I pwned the system:
@@ -138,7 +138,7 @@ Here's a short summary of how I pwned the system:
 - I found an SUID bit on */bin/bash*.
 - I executed privileged mode on **bash** using **bash -p**.
 
-![[IMAGES/21.png]]
+![](IMAGES/21.png)
 
 That's it from my side. Happy Hacking :)
 

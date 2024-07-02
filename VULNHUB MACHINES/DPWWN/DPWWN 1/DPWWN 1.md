@@ -1,4 +1,4 @@
-![[IMAGES/x.png]]
+![](IMAGES/x.png)
 # GETTING STARTED
 
 To download **dpwwn 1**, click on the link given below:
@@ -30,65 +30,65 @@ Nmap done: 256 IP addresses (3 hosts up) scanned in 3.70 seconds
 
 I then performed an **nmap** aggressive scan to find open ports and services.
 
-![[IMAGES/1.png]]
+![](IMAGES/1.png)
 # INITIAL ACCESS
 
 I viewed the *http* service running on port 80 in a browser and landed on a testing page.
 
-![[IMAGES/2.png]]
+![](IMAGES/2.png)
 
 I then ran a **ffuf** scan to find directories and files on this server.
 
-![[IMAGES/3.png]]
+![](IMAGES/3.png)
 
 I visited *info.php* and found the **php** information. Here, potential users were revealed.
 
-![[IMAGES/4.png]]
+![](IMAGES/4.png)
 
 Hence, I tried both the users *root* and *apache* with blank passwords.
 
-![[IMAGES/5.png]]
+![](IMAGES/5.png)
 
 Now that I found a valid credential, I accessed the database using this.
 
-![[IMAGES/6.png]]
+![](IMAGES/6.png)
 
 Here, I found a set of credentials in the *users* table.
 
-![[IMAGES/7.png]]
+![](IMAGES/7.png)
 
-![[IMAGES/8.png]]
+![](IMAGES/8.png)
 
 I used these credentials to connect via **ssh**.
 
-![[IMAGES/9.png]]
+![](IMAGES/9.png)
 
 With this, I gained a foothold on the machine.
 # PRIVILEGE ESCALATION
 
 I ran the **[linux smart enumeration](https://github.com/diego-treitos/linux-smart-enumeration)** to find any misconfigurations.
 
-![[IMAGES/10.png]]
+![](IMAGES/10.png)
 
-![[IMAGES/11.png]]
+![](IMAGES/11.png)
 
-![[IMAGES/12.png]]
+![](IMAGES/12.png)
 
 Through this, I discovered that the bash script present in my home directory was being executed as a **cronjob**. Cron jobs are scheduled tasks that are executed automatically after certain conditions are fulfilled.
 
-![[IMAGES/13.png]]
+![](IMAGES/13.png)
 
-![[IMAGES/14.png]]
+![](IMAGES/14.png)
 
 Hence, the file was being executed as *root* through the **crontab**. To understand the execution schedule of the script, I visited **[crontab guru](https://crontab.guru/)**.
 
-![[IMAGES/15.png]]
+![](IMAGES/15.png)
 
 To gain privileged access, I visited [**revshells**](https://www.revshells.com/) and selected a bash payload, then inserted it into the script.
 
-![[IMAGES/16.png]]
+![](IMAGES/16.png)
 
-![[IMAGES/17.png]]
+![](IMAGES/17.png)
 
 ```bash
 
@@ -97,11 +97,11 @@ rlwrap nc -lnvp 4444
 
 Finally, I waited for 3 minutes and got a reverse connection on my **netcat** listener.
 
-![[IMAGES/18.png]]
+![](IMAGES/18.png)
 
 I spawned a **tty** shell and captured the flag from the */root* directory.
 
-![[IMAGES/19.png]]
+![](IMAGES/19.png)
 # CLOSURE
 
 Here's a brief summary of how I gained access to **dpwwn 1**:
@@ -111,7 +111,7 @@ Here's a brief summary of how I gained access to **dpwwn 1**:
 3. A script in the *mystic* user's directory was executed by *crontab* as *root*, providing me with a reverse shell as *root*.
 4. With *root* access, I retrieved the flag located in */root*.
 
-![[IMAGES/20.png]]
+![](IMAGES/20.png)
 
 That's all from my side! Happy Hacking :)
 

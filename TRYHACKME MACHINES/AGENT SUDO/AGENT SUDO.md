@@ -12,120 +12,120 @@ https://tryhackme.com/r/room/agentsudoctf
 
 I performed an **nmap** aggressive scan to identify open ports and running services.
 
-![[IMAGES/1.png]]
+![](IMAGES/1.png)
 
 # INITIAL ACCESS
 
 I accessed the web server using **curl** but received instructions on how to access the page.
 
-![[IMAGES/2.png]]
+![](IMAGES/2.png)
 
 Since the message was written by *Agent R*, I tried using the nickname *R* to access the page and received a new message.
 
-![[IMAGES/3.png]]
+![](IMAGES/3.png)
 **Note:** The **-L** flag in curl is used to follow redirects.
 
 I tried accessing different pages by changing the alphabet and finally found a way to get in when I used **C**.
 
-![[IMAGES/4.png]]
+![](IMAGES/4.png)
 
 I found a username called *chris* so I attempted to crack its password for the other 2 services found running, namely *ftp* and *ssh*.
 
-![[IMAGES/5.png]]
+![](IMAGES/5.png)
 
 I successfully connected to the *ftp* server using these credentials.
 
-![[IMAGES/6.png]]
+![](IMAGES/6.png)
 
 I then downloaded all the files present in the server.
 
-![[IMAGES/7.png]]
+![](IMAGES/7.png)
 
 I then read the txt file
 
-![[IMAGES/8.png]]
+![](IMAGES/8.png)
 
 I then used **binwalk** to search for hidden files inside the images and found some in the *cutie.png*.
 
-![[IMAGES/9.png]]
+![](IMAGES/9.png)
 
 I then extracted the file from inside the image.
 
-![[IMAGES/10.png]]
+![](IMAGES/10.png)
 
 I looked inside the extracted directory.
 
-![[IMAGES/11.png]]
+![](IMAGES/11.png)
 
 I tried to extract the zip file but found that it was password protected. So I converted the file to **john** format and attempted to crack its password using **john**.
 
-![[IMAGES/12.png]]
+![](IMAGES/12.png)
 
 So I extracted the files using this password.
 
-![[IMAGES/13.png]]
+![](IMAGES/13.png)
 
 The zip contained a txt file, so I read that.
 
-![[IMAGES/14.png]]
+![](IMAGES/14.png)
 
 I visited [**CyberChef**](https://gchq.github.io/CyberChef/) and decoded the message.
 
-![[IMAGES/15.png]]
+![](IMAGES/15.png)
 
 I used the **steghide** command with the password *Area51* to extract information from the JPEG image file.
 
-![[IMAGES/16.png]]
+![](IMAGES/16.png)
 
 I read the *message.txt* file
 
-![[IMAGES/17.png]]
+![](IMAGES/17.png)
 
 I logged in using the username *james* and his password via **SSH**.
 
-![[IMAGES/18.png]]
+![](IMAGES/18.png)
 
 I found the *user* flag inside the directory
 
-![[IMAGES/19.png]]
+![](IMAGES/19.png)
 
 I then transferred the file to my system using an **HTTP** server.
 
-![[IMAGES/20.png]]
+![](IMAGES/20.png)
 
-![[IMAGES/21.png]]
+![](IMAGES/21.png)
 
 I then conducted a Google reverse image search to gather more information about the image.
 
-![[IMAGES/22.png]]
+![](IMAGES/22.png)
 
 # PRIVILEGE ESCALATION
 
 I downloaded the [**Linux Smart Enumeration**](https://github.com/diego-treitos/linux-smart-enumeration) script and ran it on the target.
 
-![[IMAGES/23.png]]
+![](IMAGES/23.png)
 
-![[IMAGES/24.png]]
+![](IMAGES/24.png)
 
-![[IMAGES/25.png]]
+![](IMAGES/25.png)
 
 The script identified something of interest.
 
-![[IMAGES/26.png]]
+![](IMAGES/26.png)
 
-![[IMAGES/27.png]]
+![](IMAGES/27.png)
 
 I searched for exploits available for this *sudo* version.
 
-![[IMAGES/28.png]]
+![](IMAGES/28.png)
 
 I read the **POC** and replicated it to escalate my privileges.
 
-![[IMAGES/29.png]]
+![](IMAGES/29.png)
 
 I captured the *root* flag and revealed Agent R's identity.
 
-![[IMAGES/30.png]]
+![](IMAGES/30.png)
 
 # CLOSURE
 

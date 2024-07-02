@@ -1,4 +1,4 @@
-![[IMAGES/x.png]]
+![](IMAGES/x.png)
 # GETTING STARTED
 
 Lame is a beginner level machine, requiring only one exploit to obtain root access. It was the first machine published on Hack The Box and was often the first machine for new users prior to its retirement.
@@ -15,20 +15,20 @@ Lame is a beginner level machine, requiring only one exploit to obtain root acce
 
 I started by performing a service version and default script scan on the target using **nmap**.
 
-![[IMAGES/1.png]]
-![[IMAGES/2.png]]
+![](IMAGES/1.png)
+![](IMAGES/2.png)
 
 # CAPTURING USER FLAG
 
 I looked for exploits for *vsftpd 2.3.4* but didn't find any that worked on the target. So, I tried looking for exploits for the *SMB* version revealed through the script scan.
 
-![[IMAGES/3.png]]
+![](IMAGES/3.png)
 
 Hence, I looked for ways to exploit the CVE and found a tool on GitHub: [https://github.com/amriunix/CVE-2007-2447](https://github.com/amriunix/CVE-2007-2447).
 
 I downloaded this onto my system and ran it.
 
-![[IMAGES/4.png]]
+![](IMAGES/4.png)
 
 I started a listener and then executed the script.
 
@@ -37,23 +37,23 @@ I started a listener and then executed the script.
 rlwrap nc -lnvp 8080
 ```
 
-![[IMAGES/5.png]]
+![](IMAGES/5.png)
 
-![[IMAGES/6.png]]
+![](IMAGES/6.png)
 
 I directly gained *root* access. Next I spawned a TTY shell for better usability.
 
-![[IMAGES/7.png]]
+![](IMAGES/7.png)
 
 Finally, I looked into the directories in */home* and found the user flag in */home/makis*.
 
-![[IMAGES/8.png]]
+![](IMAGES/8.png)
 
 # CAPTURING ROOT FLAG
 
 Since I was a root user, I went into the *root* directory and found the final flag as well.
 
-![[IMAGES/9.png]]
+![](IMAGES/9.png)
 
 # CLOSURE
 

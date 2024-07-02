@@ -1,4 +1,4 @@
-![[IMAGES/x.png]]
+![](IMAGES/x.png)
 # GETTING STARTED
 
 To download escalate linux, click [here](https://www.vulnhub.com/entry/escalate_linux-1,323/)
@@ -29,36 +29,36 @@ Nmap done: 256 IP addresses (3 hosts up) scanned in 7.37 seconds
 
 After identifying the target IP as *192.168.1.18*, I scanned it using **nmap** to find open ports and running services.
 
-![[IMAGES/1.png]]
-![[IMAGES/2.png]]
+![](IMAGES/1.png)
+![](IMAGES/2.png)
 
 # INITIAL ACCESS
 
 I accessed the HTTP server through my browser and landed on a default page.
 
-![[IMAGES/3.png]]
+![](IMAGES/3.png)
 
 So, I ran a **ffuf** scan to find other files present on the web server.
 
-![[IMAGES/4.png]]
+![](IMAGES/4.png)
 
 The **ffuf** scan identified a file called *shell.php*, so I accessed it using **curl**.
 
-![[IMAGES/5.png]]
+![](IMAGES/5.png)
 
 This gave me a hint about what it wanted. I used **curl** to send a _GET_ request to the server. I also added `?cmd=whoami` to the URL to check if `cmd` was a variable in the PHP file that could take some values.
 
-![[IMAGES/6.png]]
+![](IMAGES/6.png)
 
 I was able to execute a system command, indicating the vulnerability to command injection.
 
 To gain initial access, I first verified if the target had **nc** and **bash**.
 
-![[IMAGES/7.png]]
+![](IMAGES/7.png)
 
 Then I went to **[revshells](https://www.revshells.com/)** and configured a reverse shell **nc mkfifo** payload with my listening IP and port.
 
-![[IMAGES/8.png]]
+![](IMAGES/8.png)
 
 I then started a **nc** listener
 
@@ -69,9 +69,9 @@ rlwrap nc -lnvp 4444
 
 Finally, I sent the payload through **curl** after *URL encoding* it.
 
-![[IMAGES/9.png]]
+![](IMAGES/9.png)
 
-![[IMAGES/10.png]]
+![](IMAGES/10.png)
 
 Hence, I gained initial access to the system.
 
@@ -79,7 +79,7 @@ Since I was still a service user, I tried to spawn a TTY shell using a command I
 
 https://sushant747.gitbooks.io/total-oscp-guide/content/spawning_shells.html
 
-![[IMAGES/11.png]]
+![](IMAGES/11.png)
 
 # PRIVILEGE ESCALATION
 
@@ -92,35 +92,35 @@ find / -user root -perm -u=s -ls 2>/dev/null
 
 I found 2 interesting files
 
-![[IMAGES/12.png]]
+![](IMAGES/12.png)
 
 ### 1. USING /USER3/SHELL
 
 I executed the **shell** program in the */home/user3/* directory and gained root access.
 
-![[IMAGES/13.png]]
+![](IMAGES/13.png)
 
 ### 2. MODIFYING THE /USER5/SCRIPT FILE
 
 I executed the **script** program present in the *user5* directory and obtained results similar to **ls**.
 
-![[IMAGES/14.png]]
+![](IMAGES/14.png)
 
 You can also use **[pspy](https://github.com/DominicBreuker/pspy)** to monitor the processes.
 
 I navigated to the *tmp* directory and wrote a bash script named **ls**.
 
-![[IMAGES/16.png]]
+![](IMAGES/16.png)
 
 Then, I added this path to my environment variable.
 
-![[IMAGES/17.png]]
+![](IMAGES/17.png)
 
-![[IMAGES/18.png]]
+![](IMAGES/18.png)
 
 Finally, I executed the script.
 
-![[IMAGES/19.png]]
+![](IMAGES/19.png)
 
 
 > [!NOTE] note
@@ -130,62 +130,62 @@ Finally, I executed the script.
 
 Since the */user5/script* executes the **ls** command, I created a new script called **ls** in the */tmp* directory with a command to read the shadow file. Then, I added the */tmp* directory to my path variable.
 
-![[IMAGES/20.png]]
+![](IMAGES/20.png)
 
 Finally, I gave this file execution permission and ran **/home/user5/script**.
 
-![[IMAGES/21.png]]
+![](IMAGES/21.png)
 
 **`$6$`** indicates the usage of **SHA-512** for hashing. I copied the password field from this and pasted it into a different file on my system. Then, I used **john** to crack the password.
 
-![[IMAGES/22.png]]
+![](IMAGES/22.png)
 
 I then switched to *root*.
 
-![[IMAGES/23.png]]
+![](IMAGES/23.png)
 
 ### 4. USING USER1 PRIVILEGES
 
 I used the **ls** binary to change the password of *user1* using the */home/user5/script*.
 
-![[IMAGES/24.png]]
-![[IMAGES/25.png]]
+![](IMAGES/24.png)
+![](IMAGES/25.png)
 
 I then viewed my sudo permissions using **sudo -l**.
 
-![[IMAGES/26.png]]
+![](IMAGES/26.png)
 
 It turned out that *user1* had permission to run the **sudo** command without a password. Therefore, I used it to switch to *root*.
 
-![[IMAGES/27.png]]
+![](IMAGES/27.png)
 
 ### 5. USING /ETC/PASSWD READ PERMISSION
 
 I read the */etc/passwd* file.
 
-![[IMAGES/28.png]]
+![](IMAGES/28.png)
 
 User7 had a group id of 0 i.e root. So I used the */home/user5/script* to change the password of every user. Then I switched to user 7.
 
-![[IMAGES/29.png]]
+![](IMAGES/29.png)
 
-![[IMAGES/30.png]]
+![](IMAGES/30.png)
 
 ### 6. ADDING NEW USER TO /ETC/PASSWD
 
 I viewed the permissions on the */etc/passwd* file and found that users had write permission in it.
 
-![[IMAGES/31.png]]
+![](IMAGES/31.png)
 
 Hence, I created a new user: *rizzziom* with password *pass123* and ID *0*.
 
-![[IMAGES/32.png]]
+![](IMAGES/32.png)
 
-![[IMAGES/33.png]]
+![](IMAGES/33.png)
 
  Finally I switched to *rizzziom*
 
-![[IMAGES/34.png]]
+![](IMAGES/34.png)
 
 # CLOSURE
 
@@ -193,6 +193,6 @@ Getting initial access on the system was fairly simple; I just used the command 
 
 That's it from my side :)
 
-![[IMAGES/35.png]]
+![](IMAGES/35.png)
 
 ------------------------------------------------------------------------------------

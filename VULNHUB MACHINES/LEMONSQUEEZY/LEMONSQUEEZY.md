@@ -12,81 +12,81 @@ https://www.vulnhub.com/entry/lemonsqueezy-1,473/
 
 I performed an **nmap** aggressive scan on the target to find information about open ports and running services.
 
-![[IMAGES/1.png]]
+![](IMAGES/1.png)
 
 # INITIAL ACCESS
 
 Since the target was running a web server, I accessed it using a browser and found a default landing page.
 
-![[IMAGES/2.png]]
+![](IMAGES/2.png)
 
 I performed a fuzz scan using **dirb** to find other files and directories on the server.
 
-![[IMAGES/3.png]]
+![](IMAGES/3.png)
 
-![[IMAGES/4.png]]
+![](IMAGES/4.png)
 
 Hence, I found two interesting directories, **wordpress** and **phpmyadmin**.
 
 I visited the *wordpress* page and, upon scrolling to the bottom, found a link that took me to a login page.
 
-![[IMAGES/5.png]]
+![](IMAGES/5.png)
 
-![[IMAGES/6.png]]
+![](IMAGES/6.png)
 
-![[IMAGES/7.png]]
+![](IMAGES/7.png)
 
 Hence, I used **wpscan** to find users on the WordPress website.
 
-![[IMAGES/8.png]]
+![](IMAGES/8.png)
 
-![[IMAGES/9.png]]
+![](IMAGES/9.png)
 
 I found two users, so I tried logging in as them on the login panel using *password* as the password.
 
-![[IMAGES/10.png]]
+![](IMAGES/10.png)
 
 I received an error indicating that I had provided an incorrect password. So, I used **hydra** to find the correct password for the user.
 
-![[IMAGES/11.png]]
+![](IMAGES/11.png)
 
 Hence, I logged into the WordPress site using these credentials.
 
-![[IMAGES/12.png]]
+![](IMAGES/12.png)
 
 I looked around and found something interesting in the *Posts* tab.
 
-![[IMAGES/13.png]]
+![](IMAGES/13.png)
 
 This could be a password, so I tried using it on the *phpmyadmin* page.
 
-![[IMAGES/14.png]]
+![](IMAGES/14.png)
 
-![[IMAGES/15.png]]
+![](IMAGES/15.png)
 
 Hence, I gained access to the page containing the database information. I inspected the *wordpress* database and found the *wp_users* table that contained the password hash of both the users.
 
-![[IMAGES/16.png]]
+![](IMAGES/16.png)
 
 Here, I replaced the hash of *lemon* with *orange* so that I could access that user's WordPress panel with a password that I knew.
 
-![[IMAGES/17.png]]
+![](IMAGES/17.png)
 
 I logged into the WordPress site as *lemon* and found some more tabs.
 
-![[IMAGES/18.png]]
+![](IMAGES/18.png)
 
 I tried to upload a **php** reverse shell at *Appearance --> Editor --> 404 template* but did not have enough permissions.
 
 Hence, I went back to the *phpmyadmin* page and found a tab that allowed me to execute an **SQL** query.
 
-![[IMAGES/19.png]]
+![](IMAGES/19.png)
 
 I created a **php** backdoor using SQL by executing the following query
 
 ![](IMAGES/20.png)
 
-![[IMAGES/21.png]]
+![](IMAGES/21.png)
 
 I visited the WordPress site and attempted to execute a command using this backdoor.
 

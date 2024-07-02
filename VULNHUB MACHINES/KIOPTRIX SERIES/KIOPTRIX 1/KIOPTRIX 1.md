@@ -25,14 +25,14 @@ Hence, the target IP is identified as _192.168.1.104_.
 
 Next, I performed an aggressive scan with `nmap` to uncover open ports and services.
 
-![[IMAGES/1.png]]
-![[IMAGES/2.png]]
+![](IMAGES/1.png)
+![](IMAGES/2.png)
 
 ------------------------------------------------------------------------------------
 # EXPLOITATION PATH 1
 With port 80 open, I accessed it through my browser.
 
-![[3.png]]
+![](IMAGES/3.png)
 
 Finding nothing of interest on the homepage, I ran a `nikto` scan. The scan revealed an outdated Apache version and SSL running on the server.
 
@@ -41,7 +41,7 @@ Finding nothing of interest on the homepage, I ran a `nikto` scan. The scan reve
 nikto -h http://192.168.1.104
 ```
 
-![[4.png]]
+![](IMAGES/4.png)
 
 I Googled vulnerabilities for both and found exploits for mod_ssl. It turned out to be vulnerable to remote buffer overflow. To learn more about the exploit, I checked the following pages:
 - [GitHub: OpenLuck](https://github.com/heltonWernik/OpenLuck)
@@ -145,7 +145,7 @@ gcc OpenFuck.c -lcrypto
 
 The `nikto` scan provided insights into the platform type and Apache version, leaving me with two options: `0x6a` and `0x6b`. After attempting both, I successfully gained access using `0x6b`.
 
-![[5.png]]
+![](IMAGES/5.png)
 
 
 ```bash
@@ -281,47 +281,47 @@ Subject: LogWatch for kioptrix.level1
 # EXPLOITATION PATH 2
 The nmap scan revealed an SMB service running on port 139. To delve deeper and gather information about the server, I utilized `enum4linux`. 
 
-![[6.png]]
+![](IMAGES/6.png)
 
 Since I didn't uncover any useful information with `enum4linux`, I switched gears and launched Metasploit using `msfconsole`
 
 I searched for auxiliary modules to gather SMB information.
-![[7.png]]
+![](IMAGES/7.png)
 
 I searched through Metasploit and came across an auxiliary module called `auxiliary/scanner/smb/smb_scanner` that can detect the SMB version.
 
-![[8.png]]
+![](IMAGES/8.png)
 
 I look around for exploits related to this on google and metasploit.
-![[9.png]]
+![](IMAGES/9.png)
 
 I also discovered an exploit on Exploit-DB at [https://www.exploit-db.com/exploits/10](https://www.exploit-db.com/exploits/10). I attempted both exploits and successfully obtained a shell using each of them.
 
-![[10.png]]
+![](IMAGES/10.png)
 
 Since the Meterpreter shell failed to spawn, I attempted to spawn a regular shell instead.
 
-![[11.png]]
+![](IMAGES/11.png)
 
 I explored the system and discovered the flag located in /var/mail.
 
-![[12.png]]
+![](IMAGES/12.png)
 
 **ALTERNATIVELY I ALSO TRY THE TOOL FOUND THROUGH GOOGLE**
 
 Utilizing the exploit discovered via Google, I downloaded it onto my system.
 
-![[13.png]]
+![](IMAGES/13.png)
 
 I compiled the C code
 
-![[14.png]]
+![](IMAGES/14.png)
 
-![[15.png]]
+![](IMAGES/15.png)
 
 Finally I ran the exploit
 
-![[16.png]]
+![](IMAGES/16.png)
 
 I navigated to the flag located in `/var/mail`. 
 
@@ -342,6 +342,6 @@ Here's a summary of how I pwned the machine:-
 
 That's it from my side. Time to solve Level 2 ;)
 
-![[17.png]]
+![](IMAGES/17.png)
 
 ------------------------------------------------------------------------------------

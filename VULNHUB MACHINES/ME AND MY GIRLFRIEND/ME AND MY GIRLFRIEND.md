@@ -27,15 +27,15 @@ Nmap done: 256 IP addresses (3 hosts up) scanned in 3.61 seconds
 
 After finding the target IP to be *192.168.1.17*, I performed an **nmap** aggressive scan to find its ports and services.
 
-![[IMAGES/1.png]]
+![](IMAGES/1.png)
 
 # CAPTURING FLAG 1
 
 Since port 80 was running, I used **curl** to fetch information about the page and also accessed it on the browser.
 
-![[IMAGES/2.png]]
+![](IMAGES/2.png)
 
-![[IMAGES/3.png]]
+![](IMAGES/3.png)
 
 The site had an *HTML comment* that gave me a hint on how it could be accessed. I had to use the *X-Forwarded-For* header and use the localhost IP, i.e., 127.0.0.1, to get the intended result. This is because:
 - '*Sorry This Site Can Only Be Accessed Local*' - it can only be accessed through localhost, i.e., 127.0.0.1.
@@ -52,49 +52,49 @@ X-Forwarded-For: 127.0.0.1
 
 I went to **Proxy** and clicked on **Proxy settings**; then searched for **match and replace**.
 
-![[IMAGES/5.png]]
+![](IMAGES/5.png)
 
 I checked the *Only apply to in-scope items* and clicked on **Add**. Then, I added the header in the following manner:
 
-![[IMAGES/6.png]]
+![](IMAGES/6.png)
 
 Finally, I clicked on **OK** and closed the settings. Then, I went to the **HTTP history** tab under **Proxy** and right-clicked on the request made to the target URL, then selected **Add to scope**.
 
-![[IMAGES/11.png]]
+![](IMAGES/11.png)
 
 With this, I was done with the settings. I then accessed the target again and got access to the web page.
 
-![[IMAGES/7.png]]
+![](IMAGES/7.png)
 
 I clicked on *Register* and registered myself with the username *zbot* and password *pass123*.
 
-![[IMAGES/8.png]]
+![](IMAGES/8.png)
 
 I then logged in using these credentials.
 
-![[IMAGES/9.png]]
+![](IMAGES/9.png)
 
 The **Profile** page had an option to change the password.
 
-![[IMAGES/10.png]]
+![](IMAGES/10.png)
 
 I turned on my **Burp** Proxy and refreshed this page to intercept the request.
 
-![[IMAGES/12.png]]
+![](IMAGES/12.png)
 
 I sent the request to **Repeater** for inspection.
 
-![[IMAGES/13.png]]
+![](IMAGES/13.png)
 
 To get a response from the server, I clicked on the **Send** button.
 
 The response showed me my password in plaintext format.
 
-![[IMAGES/14.png]]
+![](IMAGES/14.png)
 
 Also, upon inspecting the URL, I found that it fetched my details based on an ID.
 
-![[IMAGES/15.png]]
+![](IMAGES/15.png)
 
 So, if I changed the *user_id* parameter, I could perform **IDOR**.
 
@@ -110,7 +110,7 @@ So, if I changed the *user_id* parameter, I could perform **IDOR**.
 
 Hence, I changed the ID value and got multiple user credentials. (This could also be done through the browser using *Inspect Element*.)
 
-![[IMAGES/16.png]]
+![](IMAGES/16.png)
 
 | id  | username       | password    |
 | --- | -------------- | ----------- |
@@ -129,50 +129,50 @@ vim users.list
 #inserted the usernames
 ```
 
-![[IMAGES/17.png]]
+![](IMAGES/17.png)
 
 Hence, I logged in using these credentials.
 
-![[IMAGES/18.png]]
+![](IMAGES/18.png)
 
 I looked at the files and directories and found the first flag inside the *.my_secret* folder.
 
-![[IMAGES/19.png]]
+![](IMAGES/19.png)
 
 Hence I captured the first flag.
 
-![[IMAGES/20.png]]
+![](IMAGES/20.png)
 
 I also found another note there
 
-![[IMAGES/21.png]]
+![](IMAGES/21.png)
 
-![[IMAGES/22.png]]
+![](IMAGES/22.png)
 # CAPTURING FLAG 2
 
 I moved into the */tmp* directory. Then, I downloaded the **[Linux Smart Enumeration](https://github.com/diego-treitos/linux-smart-enumeration)** script on my PC and transferred it to my target.
 
-![[IMAGES/23.png]]
+![](IMAGES/23.png)
 
-![[IMAGES/24.png]]
+![](IMAGES/24.png)
 
 Finally, I executed the script.
 
-![[IMAGES/25.png]]
+![](IMAGES/25.png)
 
-![[IMAGES/26.png]]
+![](IMAGES/26.png)
 
 I found out I could execute the following command without a password as sudo. To verify it, I checked my privilege with the **sudo** command.
 
-![[IMAGES/27.png]]
+![](IMAGES/27.png)
 
 To find a way to exploit this, I went to **[GTFOBins](https://gtfobins.github.io/)** and searched for **php**.
 
-![[IMAGES/28.png]]
+![](IMAGES/28.png)
 
 I found a way to exploit PHP if it was able to run as sudo. Hence, I ran the script and just changed the **CMD="/bin/sh"** to **CMD=/bin/bash** to get a **bash** shell.
 
-![[IMAGES/29.png]]
+![](IMAGES/29.png)
 
 - **`CMD="/bin/bash"`**: This sets a variable called `CMD` to the value `/bin/bash`, which is the path to the bash shell.
 - **`sudo`**: This part of the command runs the following command with superuser (root) privileges.
@@ -181,7 +181,7 @@ I found a way to exploit PHP if it was able to run as sudo. Hence, I ran the scr
 
 Hence I got root access. Now I navigate to the *root* directory and capture the final flag.
 
-![[IMAGES/30.png]]
+![](IMAGES/30.png)
 
 # CLOSURE
 
@@ -195,6 +195,6 @@ I successfully pwned the system and captured the flags. Here's how it went:
 
 That's it from my side. Until next time! :)
 
-![[IMAGES/31.png]]
+![](IMAGES/31.png)
 
 ------------------------------------------------------------------------------------

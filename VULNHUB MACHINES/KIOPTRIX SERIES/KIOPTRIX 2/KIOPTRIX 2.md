@@ -30,38 +30,38 @@ Nmap done: 256 IP addresses (3 hosts up) scanned in 3.09 seconds
 
 Once I pinpointed the target IP as _192.168.1.13_, I launched an aggressive **nmap** scan to uncover open ports, identify running services, and execute default scripts.
 
-![[IMAGES/1.png]]
-![[IMAGES/2.png]]
-![[IMAGES/3.png]]
+![](IMAGES/1.png)
+![](IMAGES/2.png)
+![](IMAGES/3.png)
 The _unauthorized_ label next to the SQL server indicates that remote login is disabled. This means the server can only be accessed locally.
 
 ------------------------------------------------------------------------------------
 # INITIAL ACCESS
 Noticing that port 80 was open, I navigated to it through my browser and found myself on a login page.
 
-![[IMAGES/4.png]]
+![](IMAGES/4.png)
 
 After trying a few default credentials, I tried performing an SQL injection using some simple payloads. When I entered the following, I bypassed the login panel:
 - username - `admin' or 1=1#`
 - password - password
 
-![[IMAGES/5.png]]
+![](IMAGES/5.png)
 
-![[IMAGES/6.png]]
+![](IMAGES/6.png)
 
 This allowed me to ping a machine and showed the results in another page *pingit.php*
 
-![[IMAGES/7.png]]
+![](IMAGES/7.png)
 
 I decided to test the system by entering a command along with an IP address. Surprisingly, it worked!
 
 The command I used was: `8.8.8.8; ls`
 
-![[IMAGES/8.png]]
+![](IMAGES/8.png)
 
 I checked for the presence of **nc** on the target by executing `which nc`, but it turned out netcat wasn't available. So, I quickly navigated to [revshells](https://www.revshells.com/), selected a bash payload, and set the listener IP and port.
 
-![[IMAGES/9.png]]
+![](IMAGES/9.png)
 
 Next, I started a netcat listener on my PC using **nc**.
 
@@ -74,44 +74,44 @@ listening on [any] 443 ...
 
 Finally I execute the payload and got reverse shell
 
-![[IMAGES/10.png]]
+![](IMAGES/10.png)
 
 At this point, I only had daemon access, functioning as a service user. To fully pwn the machine, I needed to escalate my privileges to root.
 
 While exploring, I discovered two users, _john_ and _harold_. However, I couldn't access their directories inside the _home_ page.
 
-![[IMAGES/11.png]]
+![](IMAGES/11.png)
 
 ------------------------------------------------------------------------------------
 # PRIVILEGE ESCALATION
 I continued searching but found nothing special. So, I navigated to the _/tmp_ directory and ran the **Linux Smart Enumeration** script from my system.
 
 
-![[IMAGES/12.png]]
+![](IMAGES/12.png)
 
-![[IMAGES/13.png]]
+![](IMAGES/13.png)
 
 I found the following SUID binaries, but unfortunately, they didn't seem exploitable.
 
-![[IMAGES/14.png]]
+![](IMAGES/14.png)
 
 I double-checked my kernel version using `uname -a`.
 
-![[IMAGES/15.png]]
+![](IMAGES/15.png)
 
 The **lse** script also revealed that the target was running **CentOS**, so I searched for exploits related to this using **searchsploit**.
 
-![[IMAGES/16.png]]
+![](IMAGES/16.png)
 
 I found one, so I downloaded and transferred it to my target.
 
-![[IMAGES/17.png]]
+![](IMAGES/17.png)
 
-![[IMAGES/18.png]]
+![](IMAGES/18.png)
 
 Finally, I compiled and ran the exploit.
 
-![[IMAGES/19.png]]
+![](IMAGES/19.png)
 
 ------------------------------------------------------------------------------------
 # CLOSURE
@@ -125,6 +125,6 @@ Here's how it went down:
 - Spotting a command injection flaw, I seized the chance for a slick reverse shell.
 - To cap it off, I dove into the kernel's weaknesses, snagging that sweet root access.
 
-![[IMAGES/20.png]]
+![](IMAGES/20.png)
 
 That's it from my side :) Happy Hacking!

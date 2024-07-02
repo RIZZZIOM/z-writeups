@@ -29,80 +29,80 @@ Nmap done: 256 IP addresses (7 hosts up) scanned in 4.05 seconds
 
 After identifying the target IP as *192.168.1.11*, I started an **nmap** aggressive scan to find open ports and running services.
 
-![[IMAGES/1.png]]
-![[IMAGES/2.png]]
+![](IMAGES/1.png)
+![](IMAGES/2.png)
 
 # CAPTURING FLAG 1
 
 I visited the **admin.php** listing and discovered it was just a rabbit hole. It only revealed the existence of a user called *heather* (name present on the home page) but provided no other useful information. Additionally, there was no point in attempting SQL injection.
 
-![[IMAGES/3.png]]
+![](IMAGES/3.png)
 
 So, I moved on to port **2049**, which is **nfs**.
 
 I checked the mount using **showmount**.
 
-![[IMAGES/4.png]]
+![](IMAGES/4.png)
 
 The *karl* directory was mounted, so I mounted my own directory and tried accessing the contents inside *karl*.
 
-![[IMAGES/5.png]]
+![](IMAGES/5.png)
 
-![[IMAGES/6.png]]
+![](IMAGES/6.png)
 
 To read the *.ssh* file, I created a new user with UID 1001.
 
-![[IMAGES/7.png]]
+![](IMAGES/7.png)
 
 I navigated to the *.ssh* directory and found the first flag.
 
-![[IMAGES/8.png]]
+![](IMAGES/8.png)
 
-![[IMAGES/9.png]]
+![](IMAGES/9.png)
 
 # CAPTURING FLAG 2
 
 The *.ssh* folder could be useful for initial access, so I copied it onto my system.
 
-![[IMAGES/10.png]]
+![](IMAGES/10.png)
 
-![[IMAGES/11.png]]
+![](IMAGES/11.png)
 
 I navigated inside this folder and viewed the private key.
 
-![[IMAGES/12.png]]
+![](IMAGES/12.png)
 
 This key was encrypted with a password. Therefore, I attempted to crack this password using **john**.
 
-![[IMAGES/13.png]]
+![](IMAGES/13.png)
 
 Using these credentials, I attempted to log in using **ssh**. However, I ended up in an **rbash** environment.
 
-![[IMAGES/14.png]]
+![](IMAGES/14.png)
 
 So I attempted to access a normal shell using **ssh**.
 
-![[IMAGES/15.png]]
+![](IMAGES/15.png)
 
 Now that I had shell access, I downloaded the **[lse](https://github.com/diego-treitos/linux-smart-enumeration)** script from GitHub onto my system and then transferred it to the target.
 
-![[IMAGES/18.png]]
+![](IMAGES/18.png)
 
-![[IMAGES/17.png]]
+![](IMAGES/17.png)
 
-![[IMAGES/19.png]]
+![](IMAGES/19.png)
 
 Finally, I ran the script.
 
-![[IMAGES/20.png]]
+![](IMAGES/20.png)
 
 The script discovered an SUID bit in the **cp** command.
 
-![[IMAGES/21.png]]
+![](IMAGES/21.png)
 
 I also verified this manually.
 
-![[IMAGES/22.png]]
+![](IMAGES/22.png)
 
 So, I was allowed to copy a file with root privileges. Now, I could move onto privilege escalation.
 
@@ -112,17 +112,17 @@ So, I was allowed to copy a file with root privileges. Now, I could move onto pr
 
 So I created my **ssh** key.
 
-![[IMAGES/23.png]]
+![](IMAGES/23.png)
 
 I copied my public key and pasted it into the victim machine.
 
-![[IMAGES/24.png]]
+![](IMAGES/24.png)
 
-![[IMAGES/25.png]]
+![](IMAGES/25.png)
 
 Finally, I copied the *.ssh* folder into the root directory and reconnected as root.
 
-![[IMAGES/26.png]]
+![](IMAGES/26.png)
 
 ### ESCALATING PRIVILEGE BY CREATING A NEW USER
 
@@ -130,11 +130,11 @@ Finally, I copied the *.ssh* folder into the root directory and reconnected as r
 
 So, through the mounted directory, I copied the */etc/passwd* file from the victim onto my system.
 
-![[IMAGES/27.png]]
+![](IMAGES/27.png)
 
 I then created a new user with username **nemesis** and password **bypass**.
 
-![[IMAGES/28.png]]
+![](IMAGES/28.png)
 
 
 > [!INFO] 
@@ -144,13 +144,13 @@ I then created a new user with username **nemesis** and password **bypass**.
 I then pasted the following into the copied **passwd** file.
 `nemesis:$1$mimir$mU/..cXck3dFQW1wl98mT:0:0:root:/root:/bin/bash`
 
-![[IMAGES/29.png]]
+![](IMAGES/29.png)
 
 I transferred the file back into the main system and moved it into the intended directory.
 
-![[IMAGES/30.png]]
+![](IMAGES/30.png)
 
-![[IMAGES/31.png]]
+![](IMAGES/31.png)
 
 Finally, I switched users to escalate privilege.
 
@@ -165,7 +165,7 @@ root@happycorp:/home/karl/tmp#
 
 I moved into the *root* directory and captured the second flag.
 
-![[IMAGES/32.png]]
+![](IMAGES/32.png)
 
 # CLOSURE
 
@@ -178,7 +178,7 @@ Here's how I pwned HappyCorp:
 	- I created a new user with UID 0 and added this user to the */etc/passwd* file on the target machine.
 - With root access secured, I obtained the final flag from the *root* directory.
 
-![[IMAGES/33.png]]
+![](IMAGES/33.png)
 
 That's it from my side! Until next time:)
 
