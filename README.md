@@ -28,6 +28,7 @@ A new writeup will be added on a weekly basis. Stay tuned for regular updates!
 - DPWWN
 	- DPWWN 1
 - FRISTILEAKS
+- LEMONSQUEEZY
 
 **HackTheBox**
 - LAME
@@ -35,6 +36,7 @@ A new writeup will be added on a weekly basis. Stay tuned for regular updates!
 
 **TryHackMe**
 - PICKLE RICK
+- AGENT SUDO
 
 ## 💡 Contribution
 
