@@ -135,26 +135,26 @@ Now that I have the username and password, I log into the website.
 
 The _Appearance_ tab offered options to customize various aspects of the web server's appearance. Navigating to the _Editor_ sub-tab, I found templates for various response types.
 
-![[20.png]]
+![[IMAGES/20.png]]
 
 To test it out, I navigated to the _404 template_ and added the following HTML code: 
 `<p>HELLO WORLD!!</p>`.
 
-![[21.png]]
+![[IMAGES/21.png]]
 
 Then to trigger this template, I tried accessing a page that did not exist
 
-![[22.png]]
+![[IMAGES/22.png]]
 
 My query was executed successfully. Next, I navigated to [**revshells.com**](https://www.revshells.com/) and selected a payload for a reverse shell. Since the site runs on PHP, I chose the _php pentestmonkey_ script.
 
 Alternatively, you can also download this script from _pentestmonkey's_ [GitHub repository](https://github.com/pentestmonkey/php-reverse-shell/tree/master).
 
-![[23.png]]
+![[IMAGES/23.png]]
 
 I deleted the existing code from the *404 template* and pasted this
 
-![[24.png]]
+![[IMAGES/24.png]]
 
 Then I started a listener using **nc** and triggered the *404 template*.
 
@@ -163,41 +163,41 @@ Then I started a listener using **nc** and triggered the *404 template*.
 rlwrap nc -lnvp 8080
 ```
 
-![[25.png]]
+![[IMAGES/25.png]]
 
-![[26.png]]
+![[IMAGES/26.png]]
 
 This granted me a reverse shell. Navigating to the home directory, I discovered another user named _robot_.
 
-![[27.png]]
+![[IMAGES/27.png]]
 
 I found the second flag in this folder, but I didn't have permission to read it.
 
-![[28.png]]
+![[IMAGES/28.png]]
 
 I checked the file permissions using the **ls** command.
 
-![[29.png]]
+![[IMAGES/29.png]]
 
 Since I have read permission for the second file, I read it and find that it contains an MD5 hash of the _robot_ user's password.
 
-![[30.png]]
+![[IMAGES/30.png]]
 
 I navigated to [**CrackStation**](https://crackstation.net/) to crack the hash.
 
-![[31.png]]
+![[IMAGES/31.png]]
 
 Now that I have the password, I switch to *robot*
 
-![[32.png]]
+![[IMAGES/32.png]]
 
 I couldn't run the command directly, so I needed to spawn a TTY shell. I found a Python script online from this [article](https://sushant747.gitbooks.io/total-oscp-guide/content/spawning_shells.html) and used it to spawn a TTY shell. Then, I switched to the _robot_ user.
 
-![[33.png]]
+![[IMAGES/33.png]]
 
 Then I read the 2nd flag
 
-![[34.png]]
+![[IMAGES/34.png]]
 
 > **ABOUT TTY SHELLS**
 > If you have a non-tty-shell there are certain commands and stuff you can't do. This can happen if you upload reverse shells on a webserver, so that the shell you get is by the user www-data, or similar. These users are not meant to have shells as they don't interact with the system as humans do.
@@ -223,15 +223,15 @@ find / -user root -perm -u=s -ls 2>/dev/null
 - `-ls` - search results should be displayed in the form of a list.
 - `2>/dev/null` - error messages should be discarded.
 
-![[35.png]]
+![[IMAGES/35.png]]
 
 the **nmap** file had an suid bit which could be exploited. I visited [**GTFObins**](https://gtfobins.github.io/) and searched **nmap**
 
-![[36.png]]
+![[IMAGES/36.png]]
 
 I used **nmap --interactive** to spawn an interactive shell.
 
-![[37.png]]
+![[IMAGES/37.png]]
 
 I accessed privileged mode from Bash using **bash -p**.
 
