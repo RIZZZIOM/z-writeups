@@ -29,6 +29,8 @@ A new writeup will be added on a weekly basis. Stay tuned for regular updates!
 	- DPWWN 1
 - FRISTILEAKS
 - LEMONSQUEEZY
+- TR0LL SERIES
+	- TR0LL 1
 
 **HackTheBox**
 - LAME
