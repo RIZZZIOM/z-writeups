@@ -31,6 +31,8 @@ A new writeup will be added on a weekly basis. Stay tuned for regular updates!
 - LEMONSQUEEZY
 - TR0LL SERIES
 	- TR0LL 1
+- SICKOS
+	- SICKOS 1
 
 **HackTheBox**
 - LAME
