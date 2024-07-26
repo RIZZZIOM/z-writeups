@@ -33,6 +33,7 @@ A new writeup will be added on a weekly basis. Stay tuned for regular updates!
 	- TR0LL 1
 - SICKOS
 	- SICKOS 1
+	- SICKOS 2
 
 **HackTheBox**
 - LAME
