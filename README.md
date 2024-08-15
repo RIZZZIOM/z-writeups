@@ -1,6 +1,6 @@
 # 📜 z-writeups
 
-Welcome to **z-writeups**! This repository contains detailed writeups for various machines from VulnHub, HackTheBox, and TryHackMe.
+Welcome to **z-writeups**! This repository contains detailed writeups for various machines from VulnHub, HackTheBox, TryHackMe and other cyber security platforms.
 
 ## 🚀 About
 
@@ -42,6 +42,9 @@ A new writeup will be added on a weekly basis. Stay tuned for regular updates!
 **TryHackMe**
 - PICKLE RICK
 - AGENT SUDO
+
+**CTF**
+- PENTEST-PUSUE
 
 ## 💡 Contribution
 
