@@ -12,39 +12,20 @@ A new writeup will be added on a weekly basis. Stay tuned for regular updates!
 
 ## 📂 Writeups
 
-**VulnHub**
-- MR ROBOT
-- KIOPTRIX SERIES
-    - KIOPTRIX LEVEL 1
-    - KIOPTRIX LEVEL 2
-    - KIOPTRIX LEVEL 3
-    - KIOPTRIX LEVEL 4
-    - KIOPTRIX LEVEL 5
-- INFOSEC BOXES
-    - INFOSEC OSCP PREP
-- ME AND MY GIRLFRIEND
-- HAPPYCORP
-- ESCALATE LINUX
-- DPWWN
-	- DPWWN 1
-- FRISTILEAKS
-- LEMONSQUEEZY
-- TR0LL SERIES
-	- TR0LL 1
-- SICKOS
-	- SICKOS 1
-	- SICKOS 2
-
-**HackTheBox**
-- LAME
-- TWOMILLION
-
-**TryHackMe**
-- PICKLE RICK
-- AGENT SUDO
-
-**CTF**
-- PENTEST-PUSUE
+| **VULNHUB**           | **TRY HACK ME** | **HACK THE BOX** | **MISC**           |
+| --------------------- | --------------- | ---------------- | ------------------ |
+| MR ROBOT              | PICKLE RICK     | LAME             | PENTEST-PURSUE CTF |
+| KIOPTRIX SERIES (1-5) | AGENT SUDO      | TWOMILLION       |                    |
+| INFOSEC OSCP PREP     |                 |                  |                    |
+| ME AND MY GIRLFRIEND  |                 |                  |                    |
+| HAPPYCORP             |                 |                  |                    |
+| ESCALATE LINUX        |                 |                  |                    |
+| DPWWN 1               |                 |                  |                    |
+| FRISTILEAKS           |                 |                  |                    |
+| LEMONSQUEEZY          |                 |                  |                    |
+| TR0LL 1               |                 |                  |                    |
+| SICKOS 1              |                 |                  |                    |
+| SICKOS 2              |                 |                  |                    |
 
 ## 💡 Contribution
 
