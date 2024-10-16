@@ -30,6 +30,7 @@ A new writeup will be added on a weekly basis. Stay tuned for regular updates!
 | [TROLL 1](VULNHUB%20MACHINES/TR0LL/TR0LL%201/TROLL%201.md)                                             |                                                                             |                                                                   |                                                                            |
 | [SICKOS 1.1](VULNHUB%20MACHINES/SICKOS/SICKOS%201.1/SICKOS%201.1.md)                                   |                                                                             |                                                                   |                                                                            |
 | [SICKOS 1.2](VULNHUB%20MACHINES/SICKOS/SICKOS%201.2/SICKOS%201.2.md)                                   |                                                                             |                                                                   |                                                                            |
+| [MONEYBOX](VULNHUB%20MACHINES/MONEYBOX/MONEYBOX.md)                                                    |                                                                             |                                                                   |                                                                            |
 
 ## 💡 Contribution
 
