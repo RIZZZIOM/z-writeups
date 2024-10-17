@@ -31,6 +31,7 @@ A new writeup will be added on a weekly basis. Stay tuned for regular updates!
 | [SICKOS 1.1](VULNHUB%20MACHINES/SICKOS/SICKOS%201.1/SICKOS%201.1.md)                                   |                                                                             |                                                                   |                                                                            |
 | [SICKOS 1.2](VULNHUB%20MACHINES/SICKOS/SICKOS%201.2/SICKOS%201.2.md)                                   |                                                                             |                                                                   |                                                                            |
 | [MONEYBOX](VULNHUB%20MACHINES/MONEYBOX/MONEYBOX.md)                                                    |                                                                             |                                                                   |                                                                            |
+| [MHZ_C1F](VULNHUB%20MACHINES/MHZ_C1F/MHZ_C1F.md)                                                       |                                                                             |                                                                   |                                                                            |
 
 ## 💡 Contribution
 
