@@ -51,7 +51,6 @@ I quickly downloaded **linux smart enumeration** script on my local system and t
 
 ![](IMAGES/9.png)
 
-
 ![](IMAGES/10.png)
 
 I then executed the script, but got no useful information.
@@ -117,9 +116,5 @@ Until next time!
 ![](IMAGES/X.png)
 
 ---
-
-Thank you for taking the time to read my walkthrough of **mhz_c1f**! Your interest and support mean a lot. I hope you found the guide helpful and enjoyable. Don’t forget to check my GitHub repo for more writeups on various machines.
-
-> https://github.com/RIZZZIOM/z-writeups
 
 Happy Hacking! 🎉
