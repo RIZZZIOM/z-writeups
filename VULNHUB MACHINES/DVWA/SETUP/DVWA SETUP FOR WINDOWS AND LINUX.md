@@ -7,36 +7,36 @@
 
 1. Visit the **XAMPP** page and download the installer for your system.
 
-![[1.png]]
+![[IMAGES/1.png]]
 
 2. Run the installer and make sure you mark the **Apache** and **MySQL** service for installation.
 
-![[2.png]]
+![[IMAGES/2.png]]
 
 3. The **xampp control panel** will pop up.
 
-![[3.png]]
+![[IMAGES/3.png]]
 
 4. **Apache Server Configuration**
 - Click on *Config* --> *Apache (httpd.conf)*
 
-![[4.png]]
+![[IMAGES/4.png]]
 
 - Change the listening port to **8000**
 
-![[5.png]]
+![[IMAGES/5.png]]
 
 - Save and close it. Click on *config* --> *Apache (httpd-ssl.conf)*
 
-![[6.png]]
+![[IMAGES/6.png]]
 
 - Change the listening port to **4433**
 
-![[7.png]]
+![[IMAGES/7.png]]
 
 - Save and close it. Click on *config* --> *PHP (php.ini)*
 
-![[8.png]]
+![[IMAGES/8.png]]
 
 - Ensure the following values are turned on
 
