@@ -96,8 +96,6 @@ Hence, I modified the file's properties to allow the machine account to read the
 
 Finally I read the file and found a string. This string could be another password so I tried using it to log in as administrator.
 
-![](../MYSTICORP/IMAGES/26.png)
-
 ![](IMAGES/26.png)
 
 ![](IMAGES/27.png)
