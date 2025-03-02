@@ -40,38 +40,38 @@
 
 - Ensure the following values are turned on
 
-![[9.png]]
+![[IMAGES/9.png]]
 
 - In the same file, search for **;extension=gd** and remove the **;** from the start.
 
-![[10.png]]
+![[IMAGES/10.png]]
 
 - Finally save and close the file.
 
 5. Download the **dvwa** zip file from the Github link and extract it. Rename the folder to **dvwa**.
 6. Open the folder and go inside the **config** folder.
 
-![[11.png]]
+![[IMAGES/11.png]]
 
 7. Rename the file to **config.inc.php**.
 8. Open this file and set the following values.
 
-![[12.png]]
+![[IMAGES/12.png]]
 
 9. Save and close the file.
 10. Finally copy the main folder and paste it in **C:\xampp\htdocs** ( inside the xampp\htdocs) folder. This directory contains files that need to be up on the website.
 
-![[13.png]]
+![[IMAGES/13.png]]
 
 11. Run the **Apache** and **MySQL** service on the **xampp** control panel and go to your browser and visit **`http://127.0.0.1/dvwa`**
 
-![[14.png]]
+![[IMAGES/14.png]]
 
-![[15.png]]
+![[IMAGES/15.png]]
 
 12. Click on **Create / Reset Database** and log in using the credentials **admin** | **password**.
 
-![[16.png]]
+![[IMAGES/16.png]]
 
 *DVWA* is up and running. Happy Hacking :)
 
@@ -173,10 +173,10 @@ service mysql restart
 
 9. Visit **`http://localhost/dvwa`** on your browser and click on *create/reset database* 
 
-![[15.png]]
+![[IMAGES/15.png]]
 
 10. Login using the username and password set by you in the *config.inc.ini* file.
 
-![[16.png]]
+![[IMAGES/16.png]]
 
 ------------------------------------------------------------------------------------
